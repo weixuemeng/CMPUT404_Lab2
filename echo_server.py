@@ -26,6 +26,7 @@ def start_server():
         s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR,1)  # This option allows to reuse a local address that is already in use( shut down and restart quickly)
         s.listen()  # listen for the incoming connections
         conn, addr = s.accept()  # Accept the client connection conn = client socket, addr = client Ip
+        print(addr)
         handle_connections(conn, addr)  # Send response
 
 def start_threade_server():
@@ -35,6 +36,7 @@ def start_threade_server():
         s.listen(2)  # Allow backlog of up to 2 connections ==> queue [waiting 1, waiting 2]
         while True:
             conn, addr = s.accept()  # Accept the client connection conn = client socket, addr = client Ip
+            print(addr)
             thread = Thread(target=handle_connections, args=(conn, addr))
             thread.run()
 
